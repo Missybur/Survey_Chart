@@ -16,6 +16,7 @@ var $selects = $("select"),
             return out;
           };
           var percentage = args.value / selected() * 100 + "%";
+          $('#'+args.label).text(percentage);
           return percentage;
         },
         fontSize: 14,
