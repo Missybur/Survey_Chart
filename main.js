@@ -4,10 +4,28 @@ var $selects = $("select"),
     ? JSON.parse(localStorage.getItem("data"))
     : [0, 0, 0],
   config = {
+    selected: 0,
     type: "pie",
     options: {
-      responsive: true
+      responsive: true,
+      pieceLabel: {
+        render: function(args) {
+          var selected = function() {
+            var out = 0;
+            for (var i = 0; i < data.length; i++) {
+              out = out + data[i];
+            }
+            return out;
+          };
+          return args.value / selected() * 100 + "%";
+        },
+        fontSize: 14,
+        fontStyle: "bold",
+        fontColor: "#fff",
+        fontFamily: '"Lucida Console", Monaco, monospace'
+      }
     },
+
     data: {
       labels: ["verbal", "non-verbal", "written"],
       datasets: [
