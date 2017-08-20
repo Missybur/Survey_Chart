@@ -1,8 +1,6 @@
 var $selects = $("select"),
+  data,
   ctx = $("#myChart"),
-  data = localStorage.getItem("data")
-    ? JSON.parse(localStorage.getItem("data"))
-    : [0, 0, 0],
   config = {
     selected: 0,
     type: "pie",
@@ -17,7 +15,8 @@ var $selects = $("select"),
             }
             return out;
           };
-          return args.value / selected() * 100 + "%";
+          var percentage = args.value / selected() * 100 + "%";
+          return percentage;
         },
         fontSize: 14,
         fontStyle: "bold",
@@ -26,12 +25,11 @@ var $selects = $("select"),
       }
     },
 
-    
     data: {
       labels: ["verbal", "non-verbal", "written"],
       datasets: [
         {
-          data: data,
+          data: [0, 0, 0],
           backgroundColor: ["#09c", "#c00011", "green"]
         }
       ]
@@ -42,16 +40,23 @@ myChart = new Chart(ctx, config);
 
 $(".submit").on("click", function(e) {
   var results = { v: 0, n: 0, w: 0 },
-    data = [];
+    hasSelected = 0;
   e.preventDefault();
   $selects.each(function() {
     var val = $(this).val();
-    val && results[val]++;
+    if (val) {
+      results[val]++;
+      hasSelected = 1;
+    }
   });
-  var data = [];
-  $.each(results, function(k, v) {
-    data.push(v);
-  });
+  if (hasSelected) {
+    data = [];
+    $.each(results, function(k, v) {
+      data.push(v);
+    });
+  } else {
+    data = JSON.parse(localStorage.getItem("data"));
+  }
   config.data.datasets[0].data = data;
   myChart.update();
   localStorage.data = JSON.stringify(data);
