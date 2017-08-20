@@ -1,2 +1,2 @@
 # Survey_Chart
-interactive survey
+Interactive survey
