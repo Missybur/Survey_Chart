@@ -1,0 +1,6 @@
+.content {
+  display: flex;
+}
+.grid-100, .graph {
+  flex: 1 0 0;
+}
