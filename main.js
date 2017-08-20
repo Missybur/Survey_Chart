@@ -26,6 +26,7 @@ var $selects = $("select"),
       }
     },
 
+    
     data: {
       labels: ["verbal", "non-verbal", "written"],
       datasets: [
