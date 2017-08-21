@@ -15,7 +15,7 @@ var $selects = $("select"),
             }
             return out;
           };
-          var percentage = args.value / selected() * 100 + "%";
+          var percentage = Math.round(args.value / selected() * 100) + "%";
           $('#'+args.label).text(percentage);
           return percentage;
         },
@@ -27,11 +27,11 @@ var $selects = $("select"),
     },
 
     data: {
-      labels: ["verbal", "non-verbal", "written"],
+      labels: ["Verbal", "Non-verbal", "Written"],
       datasets: [
         {
           data: [0, 0, 0],
-          backgroundColor: ["#09c", "#c00011", "green"]
+          backgroundColor: ["#a03021", "#f2ce0f", "#4d4d4d"]
         }
       ]
     }
