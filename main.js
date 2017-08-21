@@ -1,4 +1,5 @@
 var $selects = $("select"),
+    $form = $('#form'),
   data,
   ctx = $("#myChart"),
   config = {
@@ -41,22 +42,29 @@ myChart = new Chart(ctx, config);
 
 $(".submit").on("click", function(e) {
   var results = { v: 0, n: 0, w: 0 },
-    hasSelected = 0;
+    hasSelected = 0,
+      validated = 1;
   e.preventDefault();
   $selects.each(function() {
     var val = $(this).val();
     if (val) {
       results[val]++;
       hasSelected = 1;
+    } else {
+      validated = 0;
     }
   });
-  if (hasSelected) {
+  if (hasSelected && validated) {
     data = [];
     $.each(results, function(k, v) {
       data.push(v);
     });
-  } else {
+    $form.attr('data-state','submitted');
+  } else if (!hasSelected && localStorage.getItem("data") != 'undefined') {
+    $form.attr('data-state','retained');
     data = JSON.parse(localStorage.getItem("data"));
+  } else {
+    $form.attr('data-state','error')
   }
   config.data.datasets[0].data = data;
   myChart.update();
