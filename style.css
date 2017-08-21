@@ -1,12 +1,18 @@
+.errorMsg {
+  display: none;
+}
+
+form[data-state="error"] .errorMsg {
+  color: red;
+  display: block;
+  margin-top: 10px;
+}
+
 .contained {
   border: 2px solid #ccc;
   margin-left: -20px;
   margin-right: 150px;
   background-color: #b3b3b3;
-}
-
-label {
-  background-color:;
 }
 
 .graph {
@@ -37,7 +43,6 @@ label {
     margin-top: 20px;
     color: #f2ce0f;
     border-radius: 10%;
-
 }
 
 fieldset {
@@ -111,26 +116,6 @@ display: flex;
   background: #d9e4ea;
   padding: 2em 0;
   margin-top: 30px;
-}
-
-/* =================================
-  Media Queries
-==================================== */
-
-@media (min-width: 769px) {
-  .main-header,
-  .row {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-}
-@media (min-width: 1025px) {
-  .main-header,
-  .row {
-    width: 100%;
-    /*max-width: 1150px;*/
-  }
 }
 
 /*Reset CSS */
